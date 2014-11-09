@@ -2,6 +2,7 @@ package com.xgame.engine;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class XEngine extends Canvas implements Runnable {
 
@@ -9,6 +10,9 @@ public class XEngine extends Canvas implements Runnable {
     public static final int WIDTH =  300;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
+
+    //Triple buffering
+    private static final int BUFFER_STRATEGY = 3;
 
     private Thread thread;
     private JFrame mainFrame;
@@ -42,9 +46,29 @@ public class XEngine extends Canvas implements Runnable {
         }
     }
 
+    public void render(){
+        BufferStrategy bufferStrategy = this.getBufferStrategy();
+
+        if(bufferStrategy == null){
+            createBufferStrategy(BUFFER_STRATEGY);
+            return;
+        }
+
+        Graphics graphics = bufferStrategy.getDrawGraphics();
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0, 0, getWidth(), getHeight());
+        graphics.dispose();
+        bufferStrategy.show();
+    }
+
+    public void update(){
+
+    }
+
     @Override public void run() {
         while(running){
-            System.out.println("Game is running..");
+            this.update();
+            this.render();
         }
     }
 
