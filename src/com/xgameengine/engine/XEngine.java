@@ -1,7 +1,8 @@
 package com.xgameengine.engine;
 
-/**
- * Created by Ludek on 9.11.2014.
- */
-public class XEngine {
+public class XEngine implements Runnable{
+
+    @Override public void run() {
+
+    }
 }
