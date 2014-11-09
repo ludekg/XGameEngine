@@ -10,6 +10,7 @@ public class XEngine extends Canvas implements Runnable {
     public static final int WIDTH =  300;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
+    public static final String GAME_NAME = "XHunter";
 
     //Triple buffering
     private static final int BUFFER_STRATEGY = 3;
@@ -76,7 +77,7 @@ public class XEngine extends Canvas implements Runnable {
         XEngine engine = new XEngine();
         //Graphics settings
         engine.mainFrame.setResizable(false);
-        engine.mainFrame.setTitle("XGame");
+        engine.mainFrame.setTitle(GAME_NAME);
         engine.mainFrame.add(engine);
         engine.mainFrame.pack();
         engine.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
