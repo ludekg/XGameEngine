@@ -65,10 +65,15 @@ public class XEngine extends Canvas implements Runnable {
             createBufferStrategy(BUFFER_STRATEGY);
             return;
         }
+        screenDisplay.clearScreen();
+        screenDisplay.render();
+
+        for(int i = 0; i<pixels.length;i++){
+            pixels[i]= screenDisplay.pixels[i];
+        }
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, getWidth(), getHeight());
+        graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         graphics.dispose();
         bufferStrategy.show();
     }
