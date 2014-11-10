@@ -1,8 +1,12 @@
 package com.xgame.engine;
 
+import com.xgame.graphics.ScreenDisplay;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 public class XEngine extends Canvas implements Runnable {
 
@@ -12,18 +16,25 @@ public class XEngine extends Canvas implements Runnable {
     public static final int SCALE = 3;
     public static final String GAME_NAME = "XHunter";
 
+    private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+
+    //Transform buffer image to pixels
+    private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+
     //Triple buffering
     private static final int BUFFER_STRATEGY = 3;
 
     private Thread thread;
     private JFrame mainFrame;
     private boolean running;
+    private ScreenDisplay screenDisplay;
 
     //Constructor
     public XEngine(){
         Dimension frameSize = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
         setPreferredSize(frameSize);
         this.mainFrame = new JFrame();
+        this.screenDisplay = new ScreenDisplay(WIDTH, HEIGHT);
     }
 
     /**
